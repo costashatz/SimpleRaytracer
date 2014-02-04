@@ -31,6 +31,10 @@ TO BE ADDED
 
 ![Alt text](Examples/scene4-specular.png)
 
+![Alt text](Examples/testScene.png)
+
 ![Alt text](Examples/scene-3.png)
 
 ![Alt text](Examples/scene4-diffuse.png)
+
+![Alt text](Examples/scene6.png)
