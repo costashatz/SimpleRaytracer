@@ -23,10 +23,14 @@ cd build
 ./Example ../scene-files/name_of_scene.test
 ```
 
+######Syntax of scenes files:
+
+TO BE ADDED
+
 ####Sample Images
+
+![Alt text](Examples/scene4-specular.png)
 
 ![Alt text](Examples/scene-3.png)
 
 ![Alt text](Examples/scene4-diffuse.png)
-
-![Alt text](Examples/scene4-specular.png)
