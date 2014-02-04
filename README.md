@@ -26,3 +26,7 @@ cd build
 ####Sample Images
 
 ![Alt text](Examples/scene-3.png)
+
+![Alt text](Examples/scene4-diffuse.png)
+
+![Alt text](Examples/scene4-specular.png)
