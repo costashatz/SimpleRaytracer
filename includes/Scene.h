@@ -1,5 +1,7 @@
 #pragma once
 
+#include <tbb/parallel_for.h>
+
 #include "Camera.h"
 #include "Primitives.h"
 #include "Lights.h"
@@ -69,41 +71,36 @@ public:
 
 	void render()
 	{
-		Ray ray;
-		Color color;
 		int num = camera.Width()*camera.Height();
-		float p = 0.f;
-		Color* arr = new Color[num];
-		for(unsigned int r=0;r<camera.Width();r++)
-		{
-			Color cs;
-			#pragma omp parallel for private(cs, color, ray)
-			for(unsigned int c=0;c<camera.Height();c++)
-			{
-				color = Color(0.f,0.f,0.f);
+		// float p = 0.f;
+		// for(unsigned int r=0;r<camera.Width();r++)
+		tbb::parallel_for(size_t(0), size_t(camera.Width()), size_t(1), [&](size_t r) {
+			// for(unsigned int c=0;c<camera.Height();c++)
+			tbb::parallel_for(size_t(0), size_t(camera.Height()), size_t(1), [&](size_t c) {
+				Color color = Color(0.f,0.f,0.f);
 				for(unsigned int i=0;i<SAMPLES;i++)
 				{
 					for(unsigned int j=0;j<SAMPLES;j++)
 					{
-						cs = Color(0.f,0.f,0.f);
+						Color cs = Color(0.f,0.f,0.f);
 						float ks = (float(randomNumber(0,1000))/1000.f);
 						float addX = (float(i)+ks)/float(SAMPLES);
 						float addY = (float(j)+ks)/float(SAMPLES);
-						ray = camera.generateRay(r,c,addX,addY);
+						Ray ray = camera.generateRay(r,c,addX,addY);
 						raytracer.trace(ray,1,&cs);
 						color += cs;
 					}
 				}
 				color /= float(SAMPLES*SAMPLES);
 				film.Commit(r,c,color);
-				p = 100.f*float(r*camera.Width()+c)/float(num);
-				if(p==10.f || p == 30.f || p == 50.f || p == 70.f || p == 80.f || p == 85.f || p == 90.f || p == 95.f || p == 97.f || p == 98.f || p == 99.f || p == 100.f)
-				{
-					cout<<p<<"%"<<endl;
-				}
-			}
-		}
-		cout<<"Writing to file...\n";
+				// p = 100.f*float(r*camera.Width()+c)/float(num);
+				// if(p==10.f || p == 30.f || p == 50.f || p == 70.f || p == 80.f || p == 85.f || p == 90.f || p == 95.f || p == 97.f || p == 98.f || p == 99.f || p == 100.f)
+				// {
+				// 	cout<<p<<"%"<<endl;
+				// }
+			});
+		});
+		// cout<<"Writing to file...\n";
 		film.WriteImage(file);
 		file = "xdg-open "+file;
 		system(file.c_str());
