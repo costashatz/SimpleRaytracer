@@ -1,14 +1,14 @@
-###Simple Raytracer
+### Simple Raytracer
 
-#####Chatzilygeroudis Konstantinos
+##### Chatzilygeroudis Konstantinos
 
-####README TO BE UPDATED
+#### README TO BE UPDATED
 
-#####Needs C++11 compatible compiler
+##### Needs C++11 compatible compiler
 
-####How to use:
+#### How to use:
 
-######Compile:
+###### Compile:
 
 ```bash
 mkdir build && cd build
@@ -16,18 +16,18 @@ cmake ..
 make
 ```
 
-######Run example scenes:
+###### Run example scenes:
 
 ```bash
 cd build
 ./Example ../scene-files/name_of_scene.test
 ```
 
-######Syntax of scenes files:
+###### Syntax of scenes files:
 
 TO BE ADDED
 
-####Sample Images
+#### Sample Images
 
 ![Alt text](Examples/scene4-specular.png)
 
